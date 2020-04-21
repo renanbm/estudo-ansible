@@ -1,6 +1,6 @@
 ---
 - name: Upload Simple File
-  hosts: localhost
+  hosts: matriz
   become: yes
   gather_facts: yes
   tasks:
