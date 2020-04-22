@@ -1,5 +1,14 @@
+[matriz:vars]
+ansible_connection=local
+
 [matriz]
 127.0.0.1
 
-[matriz:vars]
-ansible_connection=local
+[lab:vars]
+ansible_user=root
+ansible_ssh_pass=root
+
+[lab]
+10.7.0.2
+10.7.0.3
+10.7.0.4
