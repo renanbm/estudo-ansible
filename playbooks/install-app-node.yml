@@ -1,0 +1,33 @@
+---
+- name: Install Node Application
+  hosts: lab
+  become: yes
+  gather_facts: yes
+  vars:
+    path: /usr/app
+    repository_url: https://github.com/bgsouza/app_node2/archive/master.zip
+    app_name: app_node2-master
+  tasks:
+    - name: Creates directory
+      file:
+        path: "{{path}}"
+        state: directory
+    - name: Install Unzip Package
+      package:
+        name:
+          - unzip
+        state: present
+    - name: Download and unzip repository
+      unarchive:
+        src: "{{repository_url}}"
+        dest: "{{path}}"
+        remote_src: yes
+    - name: Running NPM install
+      npm: 
+        path: "{{path}}"
+    - name: Install "pm2" node.js package globally.
+      npm:
+        name: pm2
+        global: yes
+    - name: Run node application
+      command: pm2 start {{path}}/{{app_name}}/app.js
